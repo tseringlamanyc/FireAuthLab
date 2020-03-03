@@ -120,6 +120,7 @@ class LoginVC: UIViewController {
             case .failure(let error):
                 DispatchQueue.main.async {
                     self?.errorLabel.text = "Error:\(error)"
+                    sender.stopAnimation()
                 }
             case .success(_):
                 DispatchQueue.main.async {
@@ -146,7 +147,7 @@ class LoginVC: UIViewController {
                 }
             case .success(_):
                 DispatchQueue.main.async {
-                    self?.navigateToMainView()
+                    self?.showStatusAlert(withImage: UIImage(systemName: "star.fill"), title: "Success", message: "Account created")
                 }
             }
         }
