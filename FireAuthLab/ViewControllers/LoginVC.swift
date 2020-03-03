@@ -10,6 +10,7 @@
 import UIKit
 import Comets
 import Gradients
+import TransitionButton
 
 enum AccountState {
     case existingUser
@@ -20,7 +21,7 @@ class LoginVC: UIViewController {
     
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
-    
+    @IBOutlet weak var errorLabel: UILabel!
     let backgroundLayer = Gradients.amourAmour.layer
     
     private var authSession = AuthenticationSession()
@@ -108,11 +109,52 @@ class LoginVC: UIViewController {
     }
     
     
-    @IBAction func loginButton(_ sender: UIButton) {
+    @IBAction func loginButton(_ sender: TransitionButton) {
+        sender.startAnimation()
+        guard let email = emailTF.text, !email.isEmpty, let password = passwordTF.text, !password.isEmpty else {
+            return
+        }
+        
+        authSession.signExistingUser(email: email, password: password) { [weak self](result) in
+            switch result {
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.errorLabel.text = "Error:\(error)"
+                }
+            case .success(_):
+                DispatchQueue.main.async {
+                    sender.stopAnimation(animationStyle: .expand, completion: {
+                        self?.navigateToMainView()
+                    })
+                }
+            }
+        }
+        
     }
     
     
-    @IBAction func signUpButton(_ sender: UIButton) {
+    @IBAction func signUpButton(_ sender: TransitionButton) {
+        guard let email = emailTF.text, !email.isEmpty, let password = passwordTF.text, !password.isEmpty else {
+            return
+        }
+        authSession.createNewUser(email: email, password: password) { [weak self] (result) in
+            switch result {
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.errorLabel.text = "Error: \(error)"
+                    self?.errorLabel.textColor = .systemRed
+                }
+            case .success(_):
+                DispatchQueue.main.async {
+                    self?.navigateToMainView()
+                }
+            }
+        }
+        
+    }
+    
+    private func navigateToMainView() {
+        UIViewController.showVC(storyboard: "Main", VCid: "MainVC")
     }
     
 }

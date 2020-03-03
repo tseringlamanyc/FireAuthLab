@@ -21,7 +21,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter password " textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Szn-l0-er1">
                                 <rect key="frame" x="64" y="367" width="330" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gwS-tD-0Hx">
                                 <rect key="frame" x="64" y="313" width="330" height="34"/>
@@ -45,7 +45,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="I3W-xG-XWh">
                                 <rect key="frame" x="64" y="434" width="330" height="58"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFf-1P-aCV">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFf-1P-aCV" customClass="TransitionButton" customModule="TransitionButton">
                                         <rect key="frame" x="0.0" y="0.0" width="156.5" height="58"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Log In">
@@ -55,7 +55,7 @@
                                             <action selector="loginButton:" destination="jHH-mF-0b8" eventType="touchUpInside" id="ZCx-Rv-M2m"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6NZ-FH-PMX">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6NZ-FH-PMX" customClass="TransitionButton" customModule="TransitionButton">
                                         <rect key="frame" x="173.5" y="0.0" width="156.5" height="58"/>
                                         <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Sign Up">
@@ -70,6 +70,12 @@
                                     <constraint firstAttribute="height" constant="58" id="aUI-cS-mRy"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vCv-hI-AfN">
+                                <rect key="frame" x="64" y="536" width="330" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.92133218050003052" green="0.64729656906651334" blue="0.63276789477159423" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -84,17 +90,21 @@
                             <constraint firstItem="RWr-C4-3C6" firstAttribute="trailing" secondItem="Szn-l0-er1" secondAttribute="trailing" constant="20" id="OFs-PH-ndb"/>
                             <constraint firstItem="RWr-C4-3C6" firstAttribute="trailing" secondItem="I3W-xG-XWh" secondAttribute="trailing" constant="20" id="Rwy-MO-ejJ"/>
                             <constraint firstItem="kYq-8l-4Uj" firstAttribute="height" secondItem="XWA-n6-TP2" secondAttribute="height" multiplier="0.24442" id="T1j-2H-oLY"/>
+                            <constraint firstItem="RWr-C4-3C6" firstAttribute="trailing" secondItem="vCv-hI-AfN" secondAttribute="trailing" constant="20" id="Tqt-QJ-pOv"/>
                             <constraint firstItem="I3W-xG-XWh" firstAttribute="top" secondItem="Szn-l0-er1" secondAttribute="bottom" constant="33" id="U92-0a-7Nv"/>
                             <constraint firstItem="I3W-xG-XWh" firstAttribute="leading" secondItem="RWr-C4-3C6" secondAttribute="leading" constant="64" id="UUx-R2-1Vy"/>
+                            <constraint firstItem="vCv-hI-AfN" firstAttribute="leading" secondItem="RWr-C4-3C6" secondAttribute="leading" constant="64" id="d5t-sO-R34"/>
                             <constraint firstItem="RWr-C4-3C6" firstAttribute="trailing" secondItem="kYq-8l-4Uj" secondAttribute="trailing" constant="20" id="dRY-OE-KNo"/>
                             <constraint firstItem="KH7-nz-SqJ" firstAttribute="top" secondItem="kYq-8l-4Uj" secondAttribute="bottom" constant="20" id="jVD-o0-zGf"/>
                             <constraint firstItem="KH7-nz-SqJ" firstAttribute="leading" secondItem="RWr-C4-3C6" secondAttribute="leading" constant="20" id="nmz-bh-FTW"/>
+                            <constraint firstItem="vCv-hI-AfN" firstAttribute="top" secondItem="I3W-xG-XWh" secondAttribute="bottom" constant="44" id="rYL-m1-JNe"/>
                             <constraint firstItem="gwS-tD-0Hx" firstAttribute="top" secondItem="kYq-8l-4Uj" secondAttribute="bottom" constant="20" id="zrs-OZ-FIn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RWr-C4-3C6"/>
                     </view>
                     <connections>
                         <outlet property="emailTF" destination="gwS-tD-0Hx" id="PGh-sf-dkH"/>
+                        <outlet property="errorLabel" destination="vCv-hI-AfN" id="AQY-AN-CkA"/>
                         <outlet property="passwordTF" destination="Szn-l0-er1" id="UfJ-Pf-vsT"/>
                     </connections>
                 </viewController>
