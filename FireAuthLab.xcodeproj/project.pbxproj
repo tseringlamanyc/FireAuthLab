@@ -19,6 +19,7 @@
 		52F8222F240E11FA00F8423E /* VC + navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F8222E240E11FA00F8423E /* VC + navigation.swift */; };
 		52F82231240E131400F8423E /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F82230240E131400F8423E /* LoginVC.swift */; };
 		52F82234240E13A100F8423E /* AuthSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F82233240E13A100F8423E /* AuthSession.swift */; };
+		52F82236240E1B6500F8423E /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F82235240E1B6500F8423E /* Alerts.swift */; };
 		66864B6B08AC57EBB33B2EF7 /* Pods_FireAuthLab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0429F67AF4EC7DBE7B98DC /* Pods_FireAuthLab.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		52F8222E240E11FA00F8423E /* VC + navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC + navigation.swift"; sourceTree = "<group>"; };
 		52F82230240E131400F8423E /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		52F82233240E13A100F8423E /* AuthSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSession.swift; sourceTree = "<group>"; };
+		52F82235240E1B6500F8423E /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		E156E0E1D524E3432197EDBB /* Pods-FireAuthLab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FireAuthLab.debug.xcconfig"; path = "Target Support Files/Pods-FireAuthLab/Pods-FireAuthLab.debug.xcconfig"; sourceTree = "<group>"; };
 		F9F2089F4E15A9CDFC5EE5D6 /* Pods-FireAuthLab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FireAuthLab.release.xcconfig"; path = "Target Support Files/Pods-FireAuthLab/Pods-FireAuthLab.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				52F8222E240E11FA00F8423E /* VC + navigation.swift */,
+				52F82235240E1B6500F8423E /* Alerts.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				523933D2240E0909006676C5 /* AppDelegate.swift in Sources */,
 				523933D4240E0909006676C5 /* SceneDelegate.swift in Sources */,
 				52F82234240E13A100F8423E /* AuthSession.swift in Sources */,
+				52F82236240E1B6500F8423E /* Alerts.swift in Sources */,
 				52F82231240E131400F8423E /* LoginVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
