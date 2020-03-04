@@ -31,6 +31,8 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         startComets()
+        emailTF.delegate = self
+        passwordTF.delegate = self
     }
     
     private func startComets() {
@@ -112,6 +114,8 @@ class LoginVC: UIViewController {
     @IBAction func loginButton(_ sender: TransitionButton) {
         sender.startAnimation()
         guard let email = emailTF.text, !email.isEmpty, let password = passwordTF.text, !password.isEmpty else {
+            showStatusAlert(withImage: UIImage(systemName: "exclamationmark.triangle.fill"), title: "Fail", message: "Please fill all both fields")
+            sender.stopAnimation()
             return
         }
         
@@ -136,6 +140,8 @@ class LoginVC: UIViewController {
     
     @IBAction func signUpButton(_ sender: TransitionButton) {
         guard let email = emailTF.text, !email.isEmpty, let password = passwordTF.text, !password.isEmpty else {
+            showStatusAlert(withImage: UIImage(systemName: "exclamationmark.triangle.fill"), title: "Fail", message: "Please fill all both fields")
+            sender.stopAnimation()
             return
         }
         authSession.createNewUser(email: email, password: password) { [weak self] (result) in
@@ -158,4 +164,11 @@ class LoginVC: UIViewController {
         UIViewController.showVC(storyboard: "Main", VCid: "MainVC")
     }
     
+}
+
+extension LoginVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
