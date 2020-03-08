@@ -22,6 +22,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var errorLabel: UILabel!
+    
     let backgroundLayer = Gradients.amourAmour.layer
     
     private var authSession = AuthenticationSession()
