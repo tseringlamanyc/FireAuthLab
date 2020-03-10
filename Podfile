@@ -13,4 +13,5 @@ target 'FireAuthLab' do
     pod 'SnapKit', '5.0.0'
     pod 'StatusAlert'
     pod 'TransitionButton'
+    pod 'Kingfisher'
 end
