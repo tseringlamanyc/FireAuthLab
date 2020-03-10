@@ -8,12 +8,14 @@
 
 import UIKit
 import FirebaseAuth
+import Kingfisher
 
 class MainVC: UIViewController {
     
     @IBOutlet weak var userPIc: UIImageView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var email: UILabel!
+    @IBOutlet weak var userTF: UITextField!
     
     private lazy var imagePickerController: UIImagePickerController = {
         let ip = UIImagePickerController()
@@ -34,10 +36,24 @@ class MainVC: UIViewController {
         }
     }
     
+    private let storageService = StorageServices()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         userPIc.isUserInteractionEnabled = true
         userPIc.addGestureRecognizer(longPressGesture)
+        userTF.delegate = self 
+        updateUI()
+    }
+    
+    private func updateUI() {
+        guard let user = Auth.auth().currentUser else {
+            return
+        }
+        // user - displayName, email, phonenumber, photoURL
+        email.text = user.email
+        userName.text = user.displayName
+        userPIc.kf.setImage(with: user.photoURL)
     }
     
     @objc
@@ -65,10 +81,10 @@ class MainVC: UIViewController {
     }
     
     
-    @IBAction func signOut(_ sender: UIBarButtonItem) {
+    @IBAction func signOut(_ sender: UIButton) {
         do {
             try Auth.auth().signOut()
-            UIViewController.showVC(storyboard: "Login", VCid: "LoginVC")
+            UIViewController.showVC(storyboard: "LoginStoryboard", VCid: "LoginVC")
         } catch {
             DispatchQueue.main.async {
                 self.showStatusAlert(withImage: UIImage(systemName: "exclamationmark.triangle.fill"), title: "Fail", message: "Couldnt sign out")
@@ -78,7 +94,44 @@ class MainVC: UIViewController {
 
 
 
-@IBAction func update(_ sender: UIBarButtonItem) {
+@IBAction func update(_ sender: UIButton) {
+    guard let displayName = userTF.text, !displayName.isEmpty, let selectedImage = selectedImage else {
+        showStatusAlert(withImage: UIImage(systemName: "exclamationmark.triangle.fill"), title: "Fail", message: "Missing Fields")
+        return
+    }
+    
+    guard let user = Auth.auth().currentUser else {
+        return
+    }
+    
+    let resizeImage = UIImage.resizeImage(originalImage: selectedImage, rect: userPIc.bounds)
+    
+    storageService.uploadPhoto(userId: user.uid, image: resizeImage) { [weak self] (result) in
+        switch result {
+        case .failure(let error):
+            DispatchQueue.main.async {
+                self?.showStatusAlert(withImage: UIImage(systemName: "exclamationmark.triangle.fill"), title: "Fail", message: "Error upload:\(error.localizedDescription)")
+            }
+        case .success(let url):
+            let request = Auth.auth().currentUser?.createProfileChangeRequest()
+            
+            request?.displayName = displayName
+            
+            request?.photoURL = url
+            
+            request?.commitChanges(completion: { [unowned self] (error) in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        self?.showStatusAlert(withImage: UIImage(systemName: "exclamationmark.triangle.fill"), title: "Fail", message: "Couldnt commit changes:\(error.localizedDescription)")
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self?.showStatusAlert(withImage: UIImage(systemName: "star.fill"), title: "Success", message: "Changes made")
+                    }
+                }
+            })
+        }
+    }
 }
 
 
@@ -91,6 +144,13 @@ extension MainVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
         }
         selectedImage = image
         dismiss(animated: true)
+    }
+}
+
+extension MainVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 

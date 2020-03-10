@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5232D0B1241726B3002FDE7D /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5232D0B0241726B3002FDE7D /* UIImage.swift */; };
+		5232D0B32417274E002FDE7D /* StorageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5232D0B22417274E002FDE7D /* StorageServices.swift */; };
 		523933D2240E0909006676C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523933D1240E0909006676C5 /* AppDelegate.swift */; };
 		523933D4240E0909006676C5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523933D3240E0909006676C5 /* SceneDelegate.swift */; };
 		523933D6240E0909006676C5 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523933D5240E0909006676C5 /* MainVC.swift */; };
@@ -25,6 +27,8 @@
 
 /* Begin PBXFileReference section */
 		0A0429F67AF4EC7DBE7B98DC /* Pods_FireAuthLab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FireAuthLab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5232D0B0241726B3002FDE7D /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		5232D0B22417274E002FDE7D /* StorageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServices.swift; sourceTree = "<group>"; };
 		523933CE240E0909006676C5 /* FireAuthLab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FireAuthLab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		523933D1240E0909006676C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		523933D3240E0909006676C5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +128,7 @@
 			children = (
 				52F8222E240E11FA00F8423E /* VC + navigation.swift */,
 				52F82235240E1B6500F8423E /* Alerts.swift */,
+				5232D0B0241726B3002FDE7D /* UIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -132,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				52F82233240E13A100F8423E /* AuthSession.swift */,
+				5232D0B22417274E002FDE7D /* StorageServices.swift */,
 			);
 			path = "FireBase Services";
 			sourceTree = "<group>";
@@ -263,7 +269,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				52F8222F240E11FA00F8423E /* VC + navigation.swift in Sources */,
+				5232D0B1241726B3002FDE7D /* UIImage.swift in Sources */,
 				523933D6240E0909006676C5 /* MainVC.swift in Sources */,
+				5232D0B32417274E002FDE7D /* StorageServices.swift in Sources */,
 				523933D2240E0909006676C5 /* AppDelegate.swift in Sources */,
 				523933D4240E0909006676C5 /* SceneDelegate.swift in Sources */,
 				52F82234240E13A100F8423E /* AuthSession.swift in Sources */,

@@ -6,7 +6,6 @@ target 'FireAuthLab' do
   use_frameworks!
 
   # Pods for FireAuthLab
-    pod 'Firebase/Analytics'
     pod 'Firebase/Auth'
     pod  'Comets'
     pod 'Gradients', '0.3.0'
@@ -14,4 +13,6 @@ target 'FireAuthLab' do
     pod 'StatusAlert'
     pod 'TransitionButton'
     pod 'Kingfisher'
+    pod 'FirebaseFirestoreSwift'
+    pod 'Firebase/Storage'
 end
