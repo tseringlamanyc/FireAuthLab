@@ -91,50 +91,73 @@ class MainVC: UIViewController {
             }
         }
     }
-
-
-
-@IBAction func update(_ sender: UIButton) {
-    guard let displayName = userTF.text, !displayName.isEmpty, let selectedImage = selectedImage else {
-        showStatusAlert(withImage: UIImage(systemName: "exclamationmark.triangle.fill"), title: "Fail", message: "Missing Fields")
-        return
-    }
     
-    guard let user = Auth.auth().currentUser else {
-        return
-    }
     
-    let resizeImage = UIImage.resizeImage(originalImage: selectedImage, rect: userPIc.bounds)
     
-    storageService.uploadPhoto(userId: user.uid, image: resizeImage) { [weak self] (result) in
-        switch result {
-        case .failure(let error):
-            DispatchQueue.main.async {
-                self?.showStatusAlert(withImage: UIImage(systemName: "exclamationmark.triangle.fill"), title: "Fail", message: "Error upload:\(error.localizedDescription)")
-            }
-        case .success(let url):
-            let request = Auth.auth().currentUser?.createProfileChangeRequest()
-            
-            request?.displayName = displayName
-            
-            request?.photoURL = url
-            
-            request?.commitChanges(completion: { [unowned self] (error) in
-                if let error = error {
-                    DispatchQueue.main.async {
-                        self?.showStatusAlert(withImage: UIImage(systemName: "exclamationmark.triangle.fill"), title: "Fail", message: "Couldnt commit changes:\(error.localizedDescription)")
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self?.showStatusAlert(withImage: UIImage(systemName: "star.fill"), title: "Success", message: "Changes made")
-                    }
+    @IBAction func update(_ sender: UIButton) {
+        guard let displayName = userTF.text, !displayName.isEmpty, let selectedImage = selectedImage else {
+            showStatusAlert(withImage: UIImage(systemName: "exclamationmark.triangle.fill"), title: "Fail", message: "Missing Fields")
+            return
+        }
+        
+        guard let user = Auth.auth().currentUser else {
+            return
+        }
+        
+        let resizeImage = UIImage.resizeImage(originalImage: selectedImage, rect: userPIc.bounds)
+        
+        storageService.uploadPhoto(userId: user.uid, image: resizeImage) { [weak self] (result) in
+            switch result {
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.showStatusAlert(withImage: UIImage(systemName: "exclamationmark.triangle.fill"), title: "Fail", message: "Error upload:\(error.localizedDescription)")
                 }
-            })
+            case .success(let url):
+                let request = Auth.auth().currentUser?.createProfileChangeRequest()
+                
+                request?.displayName = displayName
+                
+                request?.photoURL = url
+                
+                request?.commitChanges(completion: { [unowned self] (error) in
+                    if let error = error {
+                        DispatchQueue.main.async {
+                            self?.showStatusAlert(withImage: UIImage(systemName: "exclamationmark.triangle.fill"), title: "Fail", message: "Couldnt commit changes:\(error.localizedDescription)")
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self?.showStatusAlert(withImage: UIImage(systemName: "star.fill"), title: "Success", message: "Changes made")
+                        }
+                    }
+                })
+            }
         }
     }
-}
-
-
+    
+    
+    @IBAction func deletePressed(_ sender: UIButton) {
+        
+        print("deleted")
+        
+        guard let user = Auth.auth().currentUser else {
+            return
+        }
+        
+        user.delete(completion: { [weak self] (error) in
+            if let error = error {
+                self?.showStatusAlert(withImage: UIImage(systemName: "exclamationmark.triangle.fill"), title: "Error", message: error.localizedDescription)
+            } else {
+                self?.showStatusAlert(withImage: UIImage(systemName: "star.fill"), title: "Success", message: "Changes made")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    UIViewController.showVC(storyboard: "LoginStoryboard", VCid: "LoginVC")
+                }
+                
+            }
+        })
+        
+    }
+    
+    
 }
 
 extension MainVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
